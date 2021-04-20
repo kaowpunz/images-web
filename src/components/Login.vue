@@ -51,7 +51,7 @@ import Axios from 'axios'
     methods: {
       async onSubmit(event) {
         console.log('submit');
-        Axios.post('http://127.00.1:8000/users/login', {
+        Axios.post('http://127.0.0.1:8000/users/login', {
             email : this.form.email,
             password : this.form.password
         }).then(resp => {

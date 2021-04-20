@@ -46,24 +46,23 @@ export default {
       var imageName = uuid.v1();
       this.isLoading = true;
       try {
-            console.log(upload)
             //save image
-            // let file = upload;
-            const url = "http://127.00.1:8000/images";
-            const body = {
-                name: upload.name,
-                // Image: this.logo.imagedata.split(",")[1],
-                size: upload.size,
-                path : upload.dataURL,
-                type : upload.type 
-            };
+            const url = "http://127.0.0.1:8000/images";
+            // const body = {
+            //     name: upload.name,
+            //     // Image: this.logo.imagedata.split(",")[1],
+            //     size: upload.size,
+            //     path : upload.dataURL,
+            //     type : upload.type 
+            // };
+            let data = new FormData()
+            data.append('file', upload, upload.name)
             const config = {
                 headers: { "Content-type": "multipart/form-data" }
             };
            
-            Axios.post(url, body, config).then(resp => {
+            Axios.post(url, data, config).then(resp => {
                 console.log(resp.data);
-                // this.$router.push('dashboard');
             }).catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -78,7 +77,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    //   this.$refs.imgDropZone.removeFile(upload);
 
         this.$refs.imgDropZone.getAcceptedFiles(upload);
     }
